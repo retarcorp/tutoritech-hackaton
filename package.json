@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/retarcorp/tutoritech-hackaton/issues"
   },
-  "homepage": "https://github.com/retarcorp/tutoritech-hackaton#readme"
+  "homepage": "https://github.com/retarcorp/tutoritech-hackaton#readme",
+  "dependencies": {
+    "@vue/cli": "^3.8.4"
+  }
 }
