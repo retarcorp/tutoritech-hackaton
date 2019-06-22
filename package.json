@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/retarcorp/tutoritech-hackaton#readme",
   "dependencies": {
-    "@vue/cli": "^3.8.4"
+    "@vue/cli": "^3.8.4",
+    "element-ui": "^2.9.2"
   }
 }
