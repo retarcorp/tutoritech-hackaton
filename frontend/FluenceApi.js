@@ -18,10 +18,17 @@ export default {
         if(!this.isConnected) {
             await this.connect();
         }
-        return (await (await this.session.request(s)).result()).asString();//.asString();
+        return (lines => {
+            if(lines[0].toLowerCase().startsWith('[error]')) {
+                throw new Error('Unable to parse incoming data! '+lines[0]);
+            }
+            const names = lines.shift().split(',').map(x => x.trim());
+            return lines.map(line => line.split(', ').map(x => x.trim()).reduce((val, curr, i) => ({...val,[names[i]]:curr}), {}));
+            
+        })((await (await this.session.request(s)).result()).asString().split('\n'));
     },
 
     async getTasks() {
-        return this.execute(`SELECT * FROM `);
+        return this.execute(`SELECT * FROM tasks`);
     }
 }
