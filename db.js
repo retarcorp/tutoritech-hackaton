@@ -12,13 +12,13 @@ fluence.connect(contract, appId, ethereumUrl, privateKey).then((s) => {
     window.session = s;
 
     create_tasks_db(s)
-    drop_table(s, 'tasks')
+    // drop_table(s, 'tasks')
 
     create_student_db(s)
-    drop_table(s, 'student')
+    // drop_table(s, 'student')
 
     create_sent_tasks_db(s)
-    drop_table(s, 'sent_tasks')
+    // drop_table(s, 'sent_tasks')
 
     create_teacher_db(s)
     // session.request("INSERT INTO teachers VALUES(1, 'Bob')");
@@ -27,10 +27,10 @@ fluence.connect(contract, appId, ethereumUrl, privateKey).then((s) => {
     drop_table(s, 'teacher')
 
     create_check_tasks_db(s)
-    drop_table(s, 'check_tasks')
+    // drop_table(s, 'check_tasks')
 
     create_transactions_db(s)
-    drop_table(s, 'transactions')
+    // drop_table(s, 'transactions')
     
 
 });
