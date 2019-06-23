@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap&subset=cyrillic');
+html {
+    font-size: 0.625vmax;
+    font-family: 'Open Sans', sans-serif;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 1.4rem;
+    background-color: #f5f5f5;
+}
+* {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    text-decoration: none;
+    box-sizing: border-box;
+
+}
+#app {
+    width: 100%;
+    max-width: 110rem;
+    margin: 0 auto;
+    
+
+    .common-btn {
+        cursor:pointer;
+        font-family: inherit;
+        padding: .5rem 1rem;
+        border-radius: .2rem;
+        outline: none;
+
+        &:hover{
+            opacity: .95;
+        }
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #4311fe;
+        padding: 2rem;
+        color: #efefef;
+
+        .logo {
+            height: 4rem;
+
+            img {
+                max-height: 4rem;
+            }
+        }
+
+        .balance {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            button {
+                background-color: #ffffff;
+                color: #4311fe;
+                margin-left: 1rem;
+                border: 0;
+            }
+        }
+    }
+
+    .main-container {
+        padding: 2rem 0;
+
+        .tabs {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 2rem;
+
+            .tab {
+                padding: 1rem 1rem;
+                cursor: pointer;
+                border-bottom: 2px solid transparent;
+
+                &.active {
+                    border-bottom: 2px solid #4311fe;
+                }
+
+                i {
+                    display: inline-flex;
+                    margin-left: 1rem;
+                    background-color: #c3c0f9;
+                    color: #4311fe;
+                    border-radius: 2rem;
+                    text-align: center;
+                    line-height: 2rem;
+                    width: 2rem;
+                    height: 2rem;
+                    align-items: center;
+                    justify-content: center;
+                    font-style: normal;
+                    font-size: 1.1rem;
+                }
+            }
+        }
+
+        .task-list {
+            counter-reset: list 0;
+
+            .task {
+                display: flex;
+                flex-direction: row;
+                padding: 1.5rem 1rem;
+                background-color: #ffffff;
+                box-shadow: 0 .1rem .3rem #cfcfcf;
+                counter-increment: list 1;
+                margin-bottom: 2rem;
+                
+
+                &:before {
+                    content: counter(list);
+                    color: #c3c0f9;
+                    font-size: 3rem;
+                    align-self: center;
+                    margin-right: 2rem;
+                    margin-left: 1rem;
+                }
+
+                .description {
+                    width: 60%;
+
+                    h3 {
+                        margin-bottom: 1rem;
+                    }
+
+                    p {
+                        line-height: 1.3;
+                    }
+                }
+
+                .tools {
+                    align-self: center;
+                    justify-self: flex-end;
+                    margin-left: auto;
+
+                    button {
+                        color: #4311fe;
+                        background: transparent;
+                        border: .1rem solid #4311fe;
+                        margin-right: 1rem;
+
+                        &:hover {
+                            color: #fff;
+                            border-color: #4311fe;
+                            background-color: #4311fe;
+                        }
+                    }
+
+                    .result {
+                        display: flex;
+                        flex-direction: column;
+                        text-align: center;
+                        justify-content: center;
+                        margin-right: 1rem;
+
+                        b {
+                            font-size: 3rem;
+                            color: #4311fe;
+                            line-height: 1;
+                        }
+
+                        span {
+                            font-size: 1.2rem;
+                            color: #c3c0f9;
+                        }
+                    }
+                }
+            }
+        }
+
+        .certificate {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            border-top: .5rem solid #e5e5e5;
+            padding-top: 2rem;
+
+            button {
+                color: #4311fe;
+                background: transparent;
+                border: .1rem solid #4311fe;
+                margin-right: 1rem;
+
+                &:hover {
+                    color: #fff;
+                    border-color: #4311fe;
+                    background-color: #4311fe;
+                }
+            }
+
+            a {
+                color: #4311fe;
+            }
+        }
+    }
+}
