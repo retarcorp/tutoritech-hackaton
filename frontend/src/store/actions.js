@@ -4,11 +4,15 @@ import Vue from 'vue';
 
 export default {
 
-    addCheck(){
-        return 0;
+    async addCheck(ctx){
+        await FluenceApi.addToken(ctx.getters.userId);
+        return ctx.dispatch('init');  
     },
 
     async startWork(ctx, {id, text}) {
+        if(ctx.getters.balance < 1) {
+            throw new Error('You don\'t have enough tokens to represent this action!');
+        }
         await FluenceApi.sendTaskForCheck(ctx.getters.userId, id, text);
         await ctx.dispatch('init');
     },
@@ -17,8 +21,9 @@ export default {
         const data = await FluenceApi.getUserData(ctx.getters.userId);
         const userData = data[0];
         const tasks = await FluenceApi.getStudentTasks(ctx.getters.userId);
+        const tokens = await FluenceApi.getUserTokens(ctx.getters.userId);
 
-        ctx.commit('init', {userData, tasks});
+        ctx.commit('init', {userData, tasks, tokens});
     },
 
     async releaseCertificate(ctx) {

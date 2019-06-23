@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <AppHeader />
-    <MainContainer />
+    <MainContainer ref="main"/>
   </div>
 </template>
 
@@ -17,6 +17,7 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('init');
+    this.$refs.main.loaderVisible = false;
   }
 }
 </script>

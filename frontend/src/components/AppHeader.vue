@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="logo">
-            <img src="../assets/img/logo.svg" />
+            <img src="../assets/img/logo.png" />
         </div>
 
         <div class="balance">
@@ -23,7 +23,8 @@ export default {
 
     methods: {
         addCheck() {
-            this.$store.dispatch('addCheck');
+            this.$parent.$refs.main.loaderVisible = true;
+            this.$store.dispatch('addCheck').then(() => this.$parent.$refs.main.loaderVisible = false);
         }
     }
 }

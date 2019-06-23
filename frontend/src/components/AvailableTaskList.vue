@@ -36,9 +36,11 @@ export default {
     },
     methods: {
         startWork(id) {
+            this.$parent.loaderVisible = true;
             const text = prompt('Put here link to your solution for this task: ');
             this.$store.dispatch('startWork', {id, text})
                 .then(() => alert('Your solution was sent!'))
+                .then(() => this.$parent.loaderVisible = false)
                 .catch(err => alert(err));
         }
     }

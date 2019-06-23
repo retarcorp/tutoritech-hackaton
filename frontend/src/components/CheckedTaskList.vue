@@ -35,7 +35,8 @@ export default {
     },
     methods: {
         releaseCertificate(){
-            this.$store.dispatch('releaseCertificate');
+            this.$parent.loaderVisible = true;
+            this.$store.dispatch('releaseCertificate').then(() => this.$parent.loaderVisible = false);
         }
     }
 }

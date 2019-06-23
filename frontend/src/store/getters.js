@@ -1,5 +1,5 @@
 export default {
-    balance: state => 0,
+    balance: state => state.userData.balance || 0,
 
     availableTasksCount: (state, getters) => getters.availableTaskList.length,
 
@@ -17,7 +17,7 @@ export default {
 
     certificate: state => state.userData.cert_link === 'null' ? null : state.userData.cert_link,
 
-    userId: () => 1,
+    userId: () => 2,
 
     user: state => state.userData,
 

@@ -3,7 +3,8 @@
         <div class="tabs">
             <div class="tab" :class="{active: activeTab === 'available'}" @click="activeTab = 'available'"> <span>Available</span> <i>{{ $store.getters.availableTasksCount}}</i></div>
             <div class="tab" :class="{active: activeTab === 'on-check'}" @click="activeTab = 'on-check'"> <span>On check</span> <i>{{ $store.getters.onCheckTasksCount}}</i></div>
-            <div class="tab" :class="{active: activeTab === 'checked'}" @click="activeTab = 'checked'"> <span>Checked</span> <i>{{ $store.getters.checkedTasksCount}}</i></div>
+            <div class="tab" :class="{active: activeTab === 'checked'}" @click="activeTab = 'checked'"> <span>Checked</span> <i>{{ $store.getters.checkedTasksCount}}</i></div> 
+            <div class="loader" v-if="loaderVisible"></div>
         </div>
 
         <div class="component-container">
@@ -23,6 +24,7 @@ export default {
     data() {
         return {
             activeTab: 'available',
+            loaderVisible: true,
         }
     },
     components: {

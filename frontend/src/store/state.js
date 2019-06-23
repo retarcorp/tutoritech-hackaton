@@ -3,4 +3,5 @@ export default {
         username: ''
     },
     tasks: [],
+    tokens: [],
 }

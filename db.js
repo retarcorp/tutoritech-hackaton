@@ -58,7 +58,7 @@ function create_teacher_db (session) {
 }
 
 function create_check_tasks_db (session) {
-    session.request("CREATE TABLE check_tasks(id int, sid int, status int)").result().then((r) => {
+    session.request("CREATE TABLE check_tasks(id VARCHAR(100), sid int, status int)").result().then((r) => {
         console.log("Result: " + r.asString());
     });
 }

@@ -39,8 +39,13 @@ export default {
         return await this.execute(`SELECT * FROM students WHERE id=${id}`);
     },
 
+    async getUserTokens(id) {
+        return await this.execute(`SELECT * FROM check_tasks WHERE sid=${id} AND status=0`);
+    },
+
     async addToken(tid) {
-        return await this.execute(`INSERT INTO check_tasks VALUES (DEFAULT, ${tid}, 0)`); // todo implement
+        const token = new Array(50).fill(0).map(x => String.fromCharCode(Math.ceil(Math.random() * 25 + 65))).join('').toLowerCase();
+        return await this.execute(`INSERT INTO check_tasks VALUES ('${token}', ${tid}, 0)`); // todo implement
     },
     
     async getStudentTasks(id) {
@@ -74,6 +79,12 @@ export default {
 
     async sendTaskForCheck(sid, tid, text) {
         // todo decrease one token
+        const tokens = await this.getUserTokens(sid);
+        if(!tokens.length) {
+            throw new Error('Not enough tokens to do the action!');
+        }
+        const token = tokens[0];
+        await this.execute(`UPDATE check_tasks SET status=1 WHERE id='${token.id}'`);
         const SENT = 1;
         return await this.execute(`INSERT INTO sent_tasks (sid, tid, submission, status, sent_at) VALUES (${sid}, ${tid}, '${text}', ${SENT}, '${Date.now()}')`);
     },

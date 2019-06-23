@@ -73,6 +73,18 @@ body {
             flex-direction: row;
             margin-bottom: 2rem;
 
+            @keyframes spin {from{transform: rotate(0deg);} to{transform:rotate(360deg);}}
+            .loader {
+                width: 2rem;
+                height: 2rem;
+                margin-left: auto;
+                border: 2px solid #4311fe;
+                border-radius: 2rem;
+                border-left-color: #c3c0f9;
+                border-right-color: #c3c0f9;
+                animation: spin 1s infinite linear;
+            }
+            
             .tab {
                 padding: 1rem 1rem;
                 cursor: pointer;
