@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Testing</title>
+    <script src="https://unpkg.com/arweave/bundles/web.bundle.min.js"></script>
+    <script src="./dist/null.js"></script>
+    <script src="login.js"></script>
+</head>
+<body>
+    <h1>View all Certificates</h1>
+
+    <input type="file" id="file" onchange="get_address(this.files)" >
+    <div id="desc">Drop a keyfile to login.</div>
+
+    <!-- <label for="compose_address">Arweave Address</label> -->
+    <input type="text" placeholder="Arweave address" id="user_address" style="display: none;">
+</body>
+</html>
