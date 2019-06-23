@@ -20,15 +20,77 @@ export default {
         }
         return (lines => {
             if(lines[0].toLowerCase().startsWith('[error]')) {
-                throw new Error('Unable to parse incoming data! '+lines[0]);
+                throw new Error('Error executing query ['+s+'] '+lines[0]);
             }
             const names = lines.shift().split(',').map(x => x.trim());
+            if(!lines.length) {
+                return [];
+            }
             return lines.map(line => line.split(', ').map(x => x.trim()).reduce((val, curr, i) => ({...val,[names[i]]:curr}), {}));
             
-        })((await (await this.session.request(s)).result()).asString().split('\n'));
+        })((await (await this.session.request(s)).result()).asString().trim().split('\n'));
     },
 
     async getTasks() {
-        return this.execute(`SELECT * FROM tasks`);
+        return await this.execute(`SELECT * FROM tasks`);
+    },
+
+    async getUserData(id) {
+        return await this.execute(`SELECT * FROM students WHERE id=${id}`);
+    },
+
+    async addToken(tid) {
+        return await this.execute(`INSERT INTO check_tasks VALUES (DEFAULT, ${tid}, 0)`); // todo implement
+    },
+    
+    async getStudentTasks(id) {
+        const tasks = await this.execute(`SELECT * FROM tasks`);
+        const sent_tasks = await this.execute(`SELECT * FROM sent_tasks WHERE sid=${id}`);
+
+        const result = tasks.map(task => {
+            const st = (sent_tasks.find(st => st.tid === task.id) || {status: '0'})
+            return {
+                ...task,
+                status: st.status,
+                score: st.score,
+            }
+        })
+        return result;
+        
+    },
+
+    async getTasksForCheck() {
+        const tasks = await this.getTasks();
+        const connections = await this.execute(`SELECT * FROM sent_tasks WHERE status=1`);
+
+        const result = connections.map(connection => {
+            return {
+                ...connection,
+                task: tasks.find(t => t.id == connection.tid)
+            }
+        })
+        return result;
+    },
+
+    async sendTaskForCheck(sid, tid, text) {
+        // todo decrease one token
+        const SENT = 1;
+        return await this.execute(`INSERT INTO sent_tasks (sid, tid, submission, status, sent_at) VALUES (${sid}, ${tid}, '${text}', ${SENT}, '${Date.now()}')`);
+    },
+
+    async releaseCertificate(sid) {
+        const data = await this.execute(`SELECT * FROM sent_tasks WHERE sid=${sid}`);
+        const mark = data.reduce((prev, curr) => prev + +curr.score/data.length, 0);
+        // todo count avg by student
+        // todo send to arweave new file
+        return mark;
+    },
+
+    async sendMark(cid, mark) {
+        return await this.execute(`UPDATE sent_tasks SET status=2, score=${mark} WHERE sid=${cid.s} AND tid = ${cid.t}`)
+    },
+
+    async saveCertificate(sid, url){
+        return await this.execute(`UPDATE students SET cert_link='${url}' WHERE id=${sid}`);
     }
 }

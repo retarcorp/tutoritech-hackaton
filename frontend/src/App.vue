@@ -14,6 +14,9 @@ export default {
   components: {
     AppHeader,
     MainContainer,
+  },
+  async mounted() {
+    await this.$store.dispatch('init');
   }
 }
 </script>

@@ -35,7 +35,6 @@ fluence.connect(contract, appId, ethereumUrl, privateKey).then((s) => {
 
 });
 
-
 function create_tasks_db (session) {
     session.request("CREATE TABLE tasks(id int, title varchar(128), text varchar(300))").result().then((r) => {
         console.log("Result: " + r.asString());

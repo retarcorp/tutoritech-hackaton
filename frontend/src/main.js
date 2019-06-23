@@ -9,10 +9,6 @@ import store from './store/';
 
 Vue.config.productionTip = false;
 
-(async () => {
-  console.log(await FluenceApi.getTasks());
-})()
-
 new Vue({
   render: h => h(App),
   store: new Vuex.Store(store)
